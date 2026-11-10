@@ -1,26 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
 @import "tailwindcss";
+@import "@heroui/styles"; 
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+* { -webkit-font-smoothing: antialiased; }
+::selection { background: #65f2e7; color: #011a23; }
+input, select, textarea { color-scheme: dark; }
+.bg-brand { background-image: linear-gradient(120deg, #65f2e7, #65c5f2 55%, #65a9f2); }
+.text-brand { background-image: linear-gradient(120deg, #65f2e7, #65c5f2 55%, #65a9f2); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.ticket-notch { mask: radial-gradient(circle 10px at 0 62%, #0000 98%, #000) left / 51% 100% no-repeat, radial-gradient(circle 10px at 100% 62%, #0000 98%, #000) right / 51% 100% no-repeat; }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+
+
   }
 }
 
+:root {
+  --color-deep-space-blue-50: #e6f8fe;
+  --color-deep-space-blue-100: #cef1fd;
+  --color-deep-space-blue-200: #9ce2fc;
+  --color-deep-space-blue-300: #6bd4fa;
+  --color-deep-space-blue-400: #39c6f9;
+  --color-deep-space-blue-500: #08b7f7;
+  --color-deep-space-blue-600: #0693c6;
+  --color-deep-space-blue-700: #056e94;
+  --color-deep-space-blue-800: #034963;
+  --color-deep-space-blue-900: #022531;
+  --color-deep-space-blue-950: #011a23;
+  --color-glow-sky: #65d3f2;
+  --color-glow-mint: #65f2e7;
+  --color-glow-ice: #65e1f2;
+  --color-glow-azure: #65c5f2;
+  --color-glow-periwinkle: #65a9f2;
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-48: 48px;
+  --space-64: 64px;
+  --radius-md: 6px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-full: 9999px;
+}
+
 body {
-  background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  margin: 0; 
+  background: #011a23; 
+  color: #e6f8fe; 
+  font-family: var(--font-sans);
 }
+
+
+@theme {
+ --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-deep-space-blue-50: #e6f8fe;
+  --color-deep-space-blue-100: #cef1fd;
+  --color-deep-space-blue-200: #9ce2fc;
+  --color-deep-space-blue-300: #6bd4fa;
+  --color-deep-space-blue-400: #39c6f9;
+  --color-deep-space-blue-500: #08b7f7;
+  --color-deep-space-blue-600: #0693c6;
+  --color-deep-space-blue-700: #056e94;
+  --color-deep-space-blue-800: #034963;
+  --color-deep-space-blue-900: #022531;
+  --color-deep-space-blue-950: #011a23;
+  --color-glow-sky: #65d3f2;
+  --color-glow-mint: #65f2e7;
+  --color-glow-ice: #65e1f2;
+  --color-glow-azure: #65c5f2;
+  --color-glow-periwinkle: #65a9f2;
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-sans: 'Inter', sans-serif;
+}
+

@@ -1,68 +1,290 @@
-import Image from "next/image";
+"use client";
+
+import Link from "next/link";
+import { useMemo, useState } from "react";
+import {
+  CalendarDaysIcon,
+  MapPinIcon,
+  MagnifyingGlassIcon,
+  MusicalNoteIcon,
+  TicketIcon,
+  MicrophoneIcon,
+  SparklesIcon,
+} from "@heroicons/react/24/outline";
+
+type EventCategory = "Music" | "Speaking" | "Shows";
+type CategoryFilter = "All" | EventCategory;
+
+type Event = {
+  title: string;
+  category: EventCategory;
+  date: string;
+  time: string;
+  venue: string;
+  location: string;
+  price: number;
+  image: string;
+};
+
+const events: Event[] = [
+  {
+    title: "Neon Tides: Live in Concert",
+    category: "Music",
+    date: "Sat, Mar 14",
+    time: "8:00 PM",
+    venue: "Harbor Pavilion",
+    location: "Seattle, WA",
+    price: 45,
+    image: "photo-1501386761578-eac5c94b800a",
+  },
+  {
+    title: "Future Forward Summit 2026",
+    category: "Speaking",
+    date: "Sat, Mar 28",
+    time: "9:00 AM",
+    venue: "Grand Convention Hall",
+    location: "Austin, TX",
+    price: 120,
+    image: "photo-1475721027785-f74eccf877e2",
+  },
+  {
+    title: "Midnight Comedy Showcase",
+    category: "Shows",
+    date: "Fri, Apr 3",
+    time: "9:30 PM",
+    venue: "The Velvet Room",
+    location: "Chicago, IL",
+    price: 25,
+    image: "photo-1585699324551-f6c309eedeca",
+  },
+  {
+    title: "Open Air Sessions",
+    category: "Music",
+    date: "Sun, Apr 12",
+    time: "5:00 PM",
+    venue: "Riverside Park",
+    location: "Portland, OR",
+    price: 32,
+    image: "photo-1492684223066-81342ee5ff30",
+  },
+  {
+    title: "Ideas That Move Us",
+    category: "Speaking",
+    date: "Thu, Apr 23",
+    time: "6:30 PM",
+    venue: "The Foundry",
+    location: "New York, NY",
+    price: 55,
+    image: "photo-1505373877841-8d25f7d46678",
+  },
+  {
+    title: "Electric Dreams: After Dark",
+    category: "Shows",
+    date: "Sat, May 2",
+    time: "10:00 PM",
+    venue: "The Glasshouse",
+    location: "Los Angeles, CA",
+    price: 38,
+    image: "photo-1506157786151-b8491531f063",
+  },
+];
+
+const filters: CategoryFilter[] = ["All", "Music", "Speaking", "Shows"];
+
+function CategoryIcon({ category }: { category: EventCategory }) {
+  if (category === "Music") return <MusicalNoteIcon className="size-3.5" />;
+  if (category === "Speaking") return <MicrophoneIcon className="size-3.5" />;
+  return <SparklesIcon className="size-3.5" />;
+}
 
 export default function Home() {
+  const [activeFilter, setActiveFilter] = useState<CategoryFilter>("All");
+  const [search, setSearch] = useState("");
+
+  const visibleEvents = useMemo(() => {
+    const query = search.trim().toLowerCase();
+
+    return events.filter((event) => {
+      const matchesCategory =
+        activeFilter === "All" || event.category === activeFilter;
+      const matchesSearch =
+        query.length === 0 ||
+        [
+          event.title,
+          event.category,
+          event.venue,
+          event.location,
+        ].some((value) => value.toLowerCase().includes(query));
+
+      return matchesCategory && matchesSearch;
+    });
+  }, [activeFilter, search]);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <div className="min-h-screen bg-[#011a23] text-[#e6f8fe]">
+      <header className="border-b border-white/[0.07]">
+        <div className="mx-auto flex h-12 w-full max-w-[1120px] items-center justify-between px-5 sm:px-8">
+          <div className="flex items-center gap-8">
+            <Link href="/" className="flex items-center gap-2.5" aria-label="Event Flow home">
+              <span className="flex size-7 items-center justify-center rounded-lg bg-brand text-[#011a23]">
+                <TicketIcon className="size-4" strokeWidth={2.2} />
+              </span>
+              <span className="font-display text-[17px] font-bold tracking-[-0.04em]">
+                Event <span className="text-brand">Flow</span>
+              </span>
+            </Link>
+            <nav aria-label="Main navigation" className="hidden items-center gap-2 sm:flex">
+              <a
+                href="#upcoming-events"
+                className="rounded-full bg-white/[0.09] px-4 py-2 text-xs font-semibold text-[#65f2e7]"
+              >
+                Events
+              </a>
+              <a
+                href="#design-system"
+                className="rounded-full px-2 py-2 text-xs font-medium text-[#a2bdc7] transition-colors hover:text-white"
+              >
+                Design System
+              </a>
+            </nav>
+          </div>
+          <div className="flex items-center gap-3">
+            <Link
+              href="/login"
+              className="rounded-full px-3 py-2 text-xs font-semibold text-[#d3e6ec] transition-colors hover:text-[#65f2e7]"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              Sign in
+            </Link>
+            <Link
+              href="/register"
+              className="rounded-full bg-brand px-4 py-2.5 text-xs font-bold text-[#011a23] transition-transform hover:scale-[1.03]"
             >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+              Sign up
+            </Link>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+      </header>
+
+      <main className="mx-auto w-full max-w-[1120px] px-5 pb-16 pt-8 sm:px-8 sm:pt-10">
+        <section
+          aria-labelledby="hero-title"
+          className="overflow-hidden rounded-[24px] border border-[#16424f] bg-[radial-gradient(ellipse_at_top_left,_rgba(4,91,112,0.68),_rgba(1,36,47,0.94)_60%,_rgba(1,29,39,0.98))] px-7 py-8 sm:px-10 sm:py-9"
+        >
+          <div className="max-w-[620px]">
+            <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-[#65f2e7]">
+              Live. Together.
+            </p>
+            <h1
+              id="hero-title"
+              className="font-display text-[clamp(2.2rem,4.5vw,3rem)] font-bold leading-[1.03] tracking-[-0.055em]"
+            >
+              Find your next
+              <br />
+              <span className="text-brand">unforgettable</span> night.
+            </h1>
+            <p className="mt-4 max-w-[490px] text-sm leading-6 text-[#a3c0ca]">
+              Concerts, talks and live shows. Pick your seats, pay once, and walk
+              in with a QR code.
+            </p>
+            <label className="mt-6 flex h-12 w-full max-w-[510px] items-center gap-3 rounded-full border border-[#1a4a59] bg-[#011a23]/70 px-4 transition-colors focus-within:border-[#65d3f2]">
+              <MagnifyingGlassIcon className="size-[17px] shrink-0 text-[#65d3f2]" />
+              <span className="sr-only">Search events, venues, or cities</span>
+              <input
+                type="search"
+                value={search}
+                onChange={(event) => setSearch(event.target.value)}
+                placeholder="Search events, venues or cities"
+                className="w-full bg-transparent text-sm text-[#e6f8fe] outline-none placeholder:text-[#527b88]"
+              />
+            </label>
+          </div>
+        </section>
+
+        <section id="upcoming-events" aria-labelledby="events-title" className="pt-8">
+          <div className="flex flex-col gap-5">
+            <div>
+              <h2
+                id="events-title"
+                className="font-display text-[25px] font-bold tracking-[-0.04em] sm:text-[27px]"
+              >
+                Upcoming events
+              </h2>
+              <p className="mt-1 text-[13px] text-[#7faebb]" aria-live="polite">
+                {visibleEvents.length} {visibleEvents.length === 1 ? "event" : "events"} found
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2" aria-label="Filter events by category">
+              {filters.map((filter) => (
+                <button
+                  key={filter}
+                  type="button"
+                  aria-pressed={activeFilter === filter}
+                  onClick={() => setActiveFilter(filter)}
+                  className={`rounded-full border px-4 py-2 text-xs font-semibold transition-colors ${
+                    activeFilter === filter
+                      ? "border-transparent bg-brand text-[#011a23]"
+                      : "border-[#214450] text-[#c2dbe3] hover:border-[#65d3f2]/70 hover:text-white"
+                  }`}
+                >
+                  {filter}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {visibleEvents.length > 0 ? (
+            <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+              {visibleEvents.map((event) => (
+                <article
+                  key={event.title}
+                  className="group overflow-hidden rounded-[16px] border border-[#163b47] bg-[#02232d] transition-transform duration-200 hover:-translate-y-1 hover:border-[#2b6574]"
+                >
+                  <div
+                    role="img"
+                    aria-label={`${event.category} event`}
+                    className="relative h-[184px] bg-cover bg-center sm:h-[174px]"
+                    style={{
+                      backgroundImage: `linear-gradient(180deg, rgba(1, 26, 35, 0.1) 35%, rgba(1, 26, 35, 0.76) 100%), url("https://images.unsplash.com/${event.image}?auto=format&fit=crop&w=1000&q=85")`,
+                    }}
+                  >
+                    <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-[#011a23]/75 px-2.5 py-1 text-[10px] font-semibold text-[#e6f8fe] backdrop-blur-sm">
+                      <CategoryIcon category={event.category} />
+                      {event.category === "Shows" ? "Show" : event.category}
+                    </span>
+                    <span className="absolute bottom-3 right-3 rounded-full bg-brand px-3 py-1.5 text-[11px] font-bold text-[#011a23] shadow-lg">
+                      From ${event.price.toFixed(2)}
+                    </span>
+                  </div>
+                  <div className="p-4">
+                    <h3 className="truncate font-display text-[15px] font-semibold tracking-[-0.02em] text-[#e6f8fe]">
+                      {event.title}
+                    </h3>
+                    <div className="mt-2.5 space-y-1.5 text-xs text-[#8bb7c4]">
+                      <p className="flex items-center gap-2">
+                        <CalendarDaysIcon className="size-3.5 shrink-0 text-[#65d3f2]" />
+                        <span>{event.date} · {event.time}</span>
+                      </p>
+                      <p className="flex items-center gap-2">
+                        <MapPinIcon className="size-3.5 shrink-0 text-[#65d3f2]" />
+                        <span className="truncate">{event.venue}, {event.location}</span>
+                      </p>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div className="mt-6 rounded-2xl border border-dashed border-[#214450] px-6 py-12 text-center">
+              <p className="font-display text-lg font-semibold">No events found</p>
+              <p className="mt-1 text-sm text-[#8bb7c4]">
+                Try another search or choose a different category.
+              </p>
+            </div>
+          )}
+        </section>
+        <span id="design-system" className="sr-only">
+          Event Flow design system
+        </span>
       </main>
     </div>
   );

@@ -11,83 +11,8 @@ import {
   MicrophoneIcon,
   SparklesIcon,
 } from "@heroicons/react/24/outline";
-
-type EventCategory = "Music" | "Speaking" | "Shows";
-type CategoryFilter = "All" | EventCategory;
-
-type Event = {
-  title: string;
-  category: EventCategory;
-  date: string;
-  time: string;
-  venue: string;
-  location: string;
-  price: number;
-  image: string;
-};
-
-const events: Event[] = [
-  {
-    title: "Neon Tides: Live in Concert",
-    category: "Music",
-    date: "Sat, Mar 14",
-    time: "8:00 PM",
-    venue: "Harbor Pavilion",
-    location: "Seattle, WA",
-    price: 45,
-    image: "photo-1501386761578-eac5c94b800a",
-  },
-  {
-    title: "Future Forward Summit 2026",
-    category: "Speaking",
-    date: "Sat, Mar 28",
-    time: "9:00 AM",
-    venue: "Grand Convention Hall",
-    location: "Austin, TX",
-    price: 120,
-    image: "photo-1475721027785-f74eccf877e2",
-  },
-  {
-    title: "Midnight Comedy Showcase",
-    category: "Shows",
-    date: "Fri, Apr 3",
-    time: "9:30 PM",
-    venue: "The Velvet Room",
-    location: "Chicago, IL",
-    price: 25,
-    image: "photo-1585699324551-f6c309eedeca",
-  },
-  {
-    title: "Open Air Sessions",
-    category: "Music",
-    date: "Sun, Apr 12",
-    time: "5:00 PM",
-    venue: "Riverside Park",
-    location: "Portland, OR",
-    price: 32,
-    image: "photo-1492684223066-81342ee5ff30",
-  },
-  {
-    title: "Ideas That Move Us",
-    category: "Speaking",
-    date: "Thu, Apr 23",
-    time: "6:30 PM",
-    venue: "The Foundry",
-    location: "New York, NY",
-    price: 55,
-    image: "photo-1505373877841-8d25f7d46678",
-  },
-  {
-    title: "Electric Dreams: After Dark",
-    category: "Shows",
-    date: "Sat, May 2",
-    time: "10:00 PM",
-    venue: "The Glasshouse",
-    location: "Los Angeles, CA",
-    price: 38,
-    image: "photo-1506157786151-b8491531f063",
-  },
-];
+import { events, type CategoryFilter, type EventCategory } from "@/features/events/data";
+import { SiteFooter } from "@/components/site-footer";
 
 const filters: CategoryFilter[] = ["All", "Music", "Speaking", "Shows"];
 
@@ -235,8 +160,10 @@ export default function Home() {
           {visibleEvents.length > 0 ? (
             <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
               {visibleEvents.map((event) => (
-                <article
+                <Link
                   key={event.title}
+                  href={`/events/${event.slug}`}
+                  aria-label={`View details for ${event.title}`}
                   className="group overflow-hidden rounded-[16px] border border-[#163b47] bg-[#02232d] transition-transform duration-200 hover:-translate-y-1 hover:border-[#2b6574]"
                 >
                   <div
@@ -270,7 +197,7 @@ export default function Home() {
                       </p>
                     </div>
                   </div>
-                </article>
+                </Link>
               ))}
             </div>
           ) : (
@@ -286,6 +213,7 @@ export default function Home() {
           Event Flow design system
         </span>
       </main>
+      <SiteFooter />
     </div>
   );
 }

@@ -2,7 +2,13 @@
   "name": "@eventhub/contracts",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
   "main": "./src/index.ts",
   "types": "./src/index.ts",
-  "dependencies": { "zod": "^3" }
+  "dependencies": {
+    "zod": "^3"
+  }
 }

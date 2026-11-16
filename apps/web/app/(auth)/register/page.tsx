@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function RegisterPage() {
   return (
-    <main className="flex min-h-screen items-center justify-center bg-[#011a23] px-5 text-[#e6f8fe]">
+    <main className="flex min-h-[calc(100vh-3rem)] items-center justify-center bg-[#011a23] px-5 text-[#e6f8fe]">
       <section className="w-full max-w-md rounded-3xl border border-[#16424f] bg-[#02232d] p-8 text-center">
         <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#65f2e7]">
           Event Flow

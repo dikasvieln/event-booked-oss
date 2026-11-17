@@ -8,7 +8,6 @@ import {
   MicrophoneIcon,
   MusicalNoteIcon,
   SparklesIcon,
-  TicketIcon,
 } from "@heroicons/react/24/outline";
 import { SiteFooter } from "@/components/site-footer";
 import {
@@ -56,54 +55,7 @@ export default async function EventDetailPage({ params }: EventPageProps) {
   if (!event) notFound();
 
   return (
-    <div className="min-h-screen bg-[#011a23] text-[#e6f8fe]">
-      <header className="border-b border-white/[0.07]">
-        <div className="mx-auto flex h-12 w-full max-w-[1120px] items-center justify-between px-5 sm:px-8">
-          <div className="flex items-center gap-8">
-            <Link
-              href="/"
-              className="flex items-center gap-2.5"
-              aria-label="Event Flow home"
-            >
-              <span className="flex size-7 items-center justify-center rounded-lg bg-brand text-[#011a23]">
-                <TicketIcon className="size-4" strokeWidth={2.2} />
-              </span>
-              <span className="font-display text-[17px] font-bold tracking-[-0.04em]">
-                Event <span className="text-brand">Flow</span>
-              </span>
-            </Link>
-            <nav aria-label="Main navigation" className="hidden items-center gap-2 sm:flex">
-              <Link
-                href="/#upcoming-events"
-                className="rounded-full bg-white/[0.09] px-4 py-2 text-xs font-semibold text-[#65f2e7]"
-              >
-                Events
-              </Link>
-              <Link
-                href="/#design-system"
-                className="rounded-full px-2 py-2 text-xs font-medium text-[#a2bdc7] transition-colors hover:text-white"
-              >
-                Design System
-              </Link>
-            </nav>
-          </div>
-          <div className="flex items-center gap-3">
-            <Link
-              href="/login"
-              className="rounded-full px-3 py-2 text-xs font-semibold text-[#d3e6ec] transition-colors hover:text-[#65f2e7]"
-            >
-              Sign in
-            </Link>
-            <Link
-              href="/register"
-              className="rounded-full bg-brand px-4 py-2.5 text-xs font-bold text-[#011a23] transition-transform hover:scale-[1.03]"
-            >
-              Sign up
-            </Link>
-          </div>
-        </div>
-      </header>
-
+    <div className="min-h-[calc(100vh-3rem)] bg-[#011a23] text-[#e6f8fe]">
       <main className="mx-auto w-full max-w-[1120px] px-5 pb-12 pt-5 sm:px-8 sm:pt-7">
         <Link
           href="/#upcoming-events"

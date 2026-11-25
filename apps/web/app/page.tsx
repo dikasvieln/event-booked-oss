@@ -45,11 +45,11 @@ export default function Home() {
   }, [activeFilter, search]);
 
   return (
-    <div className="min-h-[calc(100vh-3rem)] bg-[#011a23] text-[#e6f8fe]">
+    <div className="c-home min-h-[calc(100vh-3rem)] text-[#e6f8fe]">
       <main className="mx-auto w-full max-w-[1120px] px-5 pb-16 pt-8 sm:px-8 sm:pt-10">
         <section
           aria-labelledby="hero-title"
-          className="overflow-hidden rounded-[24px] border border-[#16424f] bg-[radial-gradient(ellipse_at_top_left,_rgba(4,91,112,0.68),_rgba(1,36,47,0.94)_60%,_rgba(1,29,39,0.98))] px-7 py-8 sm:px-10 sm:py-9"
+          className="c-home__hero overflow-hidden rounded-[24px] border border-[#16424f] px-7 py-8 sm:px-10 sm:py-9"
         >
           <div className="max-w-[620px]">
             <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-[#65f2e7]">
@@ -67,7 +67,7 @@ export default function Home() {
               Concerts, talks and live shows. Pick your seats, pay once, and walk
               in with a QR code.
             </p>
-            <label className="mt-6 flex h-12 w-full max-w-[510px] items-center gap-3 rounded-full border border-[#1a4a59] bg-[#011a23]/70 px-4 transition-colors focus-within:border-[#65d3f2]">
+            <label className="c-home__search mt-6 flex h-12 w-full max-w-[510px] items-center gap-3 rounded-full border border-[#1a4a59] px-4 transition-colors focus-within:border-[#65d3f2]">
               <MagnifyingGlassIcon className="size-[17px] shrink-0 text-[#65d3f2]" />
               <span className="sr-only">Search events, venues, or cities</span>
               <input
@@ -101,9 +101,9 @@ export default function Home() {
                   type="button"
                   aria-pressed={activeFilter === filter}
                   onClick={() => setActiveFilter(filter)}
-                  className={`rounded-full border px-4 py-2 text-xs font-semibold transition-colors ${
+                  className={`c-home__filter rounded-full border px-4 py-2 text-xs font-semibold transition-colors ${
                     activeFilter === filter
-                      ? "border-transparent bg-brand text-[#011a23]"
+                      ? "c-home__filter--active border-transparent"
                       : "border-[#214450] text-[#c2dbe3] hover:border-[#65d3f2]/70 hover:text-white"
                   }`}
                 >
@@ -120,7 +120,7 @@ export default function Home() {
                   key={event.title}
                   href={`/events/${event.slug}`}
                   aria-label={`View details for ${event.title}`}
-                  className="group overflow-hidden rounded-[16px] border border-[#163b47] bg-[#02232d] transition-transform duration-200 hover:-translate-y-1 hover:border-[#2b6574]"
+                  className="c-home__event-card group overflow-hidden rounded-[16px] border border-[#163b47] transition-transform duration-200 hover:-translate-y-1 hover:border-[#2b6574]"
                 >
                   <div
                     role="img"
@@ -130,7 +130,7 @@ export default function Home() {
                       backgroundImage: `linear-gradient(180deg, rgba(1, 26, 35, 0.1) 35%, rgba(1, 26, 35, 0.76) 100%), url("https://images.unsplash.com/${event.image}?auto=format&fit=crop&w=1000&q=85")`,
                     }}
                   >
-                    <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-[#011a23]/75 px-2.5 py-1 text-[10px] font-semibold text-[#e6f8fe] backdrop-blur-sm">
+                    <span className="c-home__event-category absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full border border-white/10 px-2.5 py-1 text-[10px] font-semibold text-[#e6f8fe] backdrop-blur-sm">
                       <CategoryIcon category={event.category} />
                       {event.category === "Shows" ? "Show" : event.category}
                     </span>

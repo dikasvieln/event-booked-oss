@@ -1,0 +1,56 @@
+@mixin emit {
+  $deep-space-blue-50: #e6f8fe;
+  $deep-space-blue-100: #cef1fd;
+  $deep-space-blue-200: #9ce2fc;
+  $deep-space-blue-300: #6bd4fa;
+  $deep-space-blue-400: #39c6f9;
+  $deep-space-blue-500: #08b7f7;
+  $deep-space-blue-600: #0693c6;
+  $deep-space-blue-700: #056e94;
+  $deep-space-blue-800: #034963;
+  $deep-space-blue-900: #022531;
+  $deep-space-blue-950: #011a23;
+  $glow-sky: #65d3f2;
+  $glow-mint: #65f2e7;
+  $glow-ice: #65e1f2;
+  $glow-azure: #65c5f2;
+  $glow-periwinkle: #65a9f2;
+
+  :root {
+    --color-deep-space-blue-50: #{$deep-space-blue-50};
+    --color-deep-space-blue-100: #{$deep-space-blue-100};
+    --color-deep-space-blue-200: #{$deep-space-blue-200};
+    --color-deep-space-blue-300: #{$deep-space-blue-300};
+    --color-deep-space-blue-400: #{$deep-space-blue-400};
+    --color-deep-space-blue-500: #{$deep-space-blue-500};
+    --color-deep-space-blue-600: #{$deep-space-blue-600};
+    --color-deep-space-blue-700: #{$deep-space-blue-700};
+    --color-deep-space-blue-800: #{$deep-space-blue-800};
+    --color-deep-space-blue-900: #{$deep-space-blue-900};
+    --color-deep-space-blue-950: #{$deep-space-blue-950};
+    --color-glow-sky: #{$glow-sky};
+    --color-glow-mint: #{$glow-mint};
+    --color-glow-ice: #{$glow-ice};
+    --color-glow-azure: #{$glow-azure};
+    --color-glow-periwinkle: #{$glow-periwinkle};
+  }
+
+  @theme {
+    --color-deep-space-blue-50: #{$deep-space-blue-50};
+    --color-deep-space-blue-100: #{$deep-space-blue-100};
+    --color-deep-space-blue-200: #{$deep-space-blue-200};
+    --color-deep-space-blue-300: #{$deep-space-blue-300};
+    --color-deep-space-blue-400: #{$deep-space-blue-400};
+    --color-deep-space-blue-500: #{$deep-space-blue-500};
+    --color-deep-space-blue-600: #{$deep-space-blue-600};
+    --color-deep-space-blue-700: #{$deep-space-blue-700};
+    --color-deep-space-blue-800: #{$deep-space-blue-800};
+    --color-deep-space-blue-900: #{$deep-space-blue-900};
+    --color-deep-space-blue-950: #{$deep-space-blue-950};
+    --color-glow-sky: #{$glow-sky};
+    --color-glow-mint: #{$glow-mint};
+    --color-glow-ice: #{$glow-ice};
+    --color-glow-azure: #{$glow-azure};
+    --color-glow-periwinkle: #{$glow-periwinkle};
+  }
+}

@@ -1,0 +1,39 @@
+@mixin emit {
+  .c-home {
+    --home-background: var(--color-deep-space-blue-950);
+    --home-hero-background: radial-gradient(
+      ellipse at top left,
+      rgb(4 91 112 / 68%),
+      rgb(1 36 47 / 94%) 60%,
+      rgb(1 29 39 / 98%)
+    );
+    --home-search-background: rgb(1 26 35 / 70%);
+    --home-event-card-background: #02232d;
+    --home-event-category-background: rgb(1 26 35 / 75%);
+
+    background-color: var(--home-background);
+
+    &__hero {
+      background: var(--home-hero-background);
+    }
+
+    &__search {
+      background-color: var(--home-search-background);
+    }
+
+    &__event-card {
+      background-color: var(--home-event-card-background);
+    }
+
+    &__event-category {
+      background-color: var(--home-event-category-background);
+    }
+
+    &__filter {
+      &--active {
+        background-image: linear-gradient(120deg, #65f2e7, #65c5f2 55%, #65a9f2);
+        color: var(--color-deep-space-blue-950);
+      }
+    }
+  }
+}
